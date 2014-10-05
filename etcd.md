@@ -72,4 +72,11 @@ type Handler interface {
 ** sort
 ** regexp
 ** stringconv
-** 
+**
+
+* etcd里面的周期性
+etcd通过 time.Tick()产生定时事件，
+定时发生后，向raft node server的一个channel推送一个空结构体消息
+raft node server通过select监听此channel，当有消息到达后，调用当前状态下的 tick函数，例如tickHeartbeat
+这种select的使用方式，可以实现事件驱动的server逻辑，非常重要！
+
