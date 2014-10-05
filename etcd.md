@@ -18,9 +18,58 @@ func NewEncoder(w io.Writer) *Encoder
 * 在结构里面组合进一个接口的用法很常见
 ```
 type CORSHandler struct {
-	    Handler http.Handler
-			    Info    *CORSInfo
+    Handler http.Handler
+	Info    *CORSInfo
 }
 ```
 
-* 在golang里面，接口用的非常多，要注意
+* 在golang里面，接口用的非常多，要注意，下面是常见的接口
+```
+package builtin
+type error interface {
+	Error() string
+}
+
+package io
+type Reader interface {
+	Read(p []byte) (n int, err error)
+}
+
+type Writer interface {
+	Write(p []byte) (n int, err error)
+}
+
+type Closer interface {
+	Close() error
+}
+
+type ReadWriter interface {
+	Reader
+	Writer
+}
+
+package http
+type Handler interface {
+	ServeHTTP(ResponseWriter, *Request)
+}
+```
+
+* 常用的golang package
+** fmt
+** log
+** strings
+** bytes
+** time
+** encoding/json
+** bufio
+** container
+** errors
+** flag
+** io
+** io.util
+** os
+** path
+** sort
+** regexp
+** stringconv
+** 
